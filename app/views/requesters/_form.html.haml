@@ -1,0 +1,41 @@
+.row.d-flex.justify-content-center.mt-lg-5
+  .col.col-sm-12.col-md-10.col-xl-8
+    = simple_form_for @requester do |f|
+      .card
+        .card-header.text-white.bg-main.mb-2.rounded-top
+          .h6.text-center.mt-2 Novo Solicitante
+        .card-body.bg-light
+          .form-group.row
+            %label.col-sm-2.col-form-label{for: 'company_name'} Razão Social:
+            .col-sm-10
+              = f.input :company_name,
+                label: false,
+                class: 'form-control',
+                required: true
+          .form-group.row
+            %label.col-sm-2.col-form-label{for: 'cnpj'} Endereço:
+            .col-sm-10
+              = f.input :address,
+              label: false ,
+              class: 'form-control',
+              required: true
+          .form-group.row
+            %label.col-sm-2.col-form-label{for: 'cnpj'} CNPJ:
+            .col-sm-4
+              = f.input :cnpj,
+                label: false ,
+                class: 'form-control',
+                required: true
+            %label.col-sm-2.col-form-label{for: 'cnpj'} Telefone:
+            .col-sm-4
+              = f.input :phone,
+              label: false,
+              class: 'form-control',
+              required: true
+        .card-footer.bg-transparent.border-0
+          .row.justify-content-between
+            .col
+              .float-right
+                = f.button :submit, 'Salvar', class: 'btn btn-primary'
+              .float-left
+                = link_to 'Voltar', requesters_path, class: 'btn btn-light'

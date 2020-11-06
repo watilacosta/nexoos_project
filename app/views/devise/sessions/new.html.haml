@@ -1,0 +1,26 @@
+.container.loginForm
+  .text-center=image_tag('logo.svg', size: '200x50')
+  %h1.mt-5.text-center Entrar no Sistema
+  = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .form-group.has-feedback
+      = f.input :email,
+        required: false,
+        label: false,
+        autofocus: true,
+        input_html: { autocomplete: "email",
+                      class: 'form-control rounded-lg p-1',
+                      placeholder: 'exemplo@seuemail.com.br' }
+      %span.glyphicon.form-control-feedback
+    .form-group.has-feedback
+      = f.input :password,
+        required: false,
+        label: false,
+        input_html: { autocomplete: "current-password",
+                      class: 'form-control rounded-lg p-1',
+                      placeholder: 'Senha' }
+      %span.glyphicon.form-control-feedback
+
+    .form-inline
+      .loginPwReset{:id => ""}
+        = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+    %button#submit.btn.btn-default.submit.rounded-pill{type:"submit", value: "Entrar"} Entrar

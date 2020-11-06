@@ -1,0 +1,39 @@
+.d-sm-flex.align-items-center.justify-content-between.mb-4
+  .h1.mb-0.mt-4.title-gray Listagem de Solicitantes
+  - if can? :new, Requester
+    = link_to new_requester_path, class: 'btn btn-primary rounded-pill mt-3' do
+      %i.fas.fa-plus-circle.mr-2
+      Cadastrar Solicitante
+
+- if @requesters.present?
+  .row
+    .col-md.mb-4
+      .card.p-3
+        .table-responsive
+          %table.table.table-hover.table-borderless.text-center
+            %thead.bg-main
+              %tr
+                %th Razão Socila
+                %th CNPJ
+                %th Endereço
+                %th Telefone
+                %th{colspan: 3} Opções
+            %tbody
+              - @requesters.each do |requester|
+                %tr
+                  %td= requester.company_name
+                  %td= requester.cnpj
+                  %td= requester.address
+                  %td= requester.phone
+                  %td.d-flex.justify-content-center
+                    - if can? :edit, requester
+                      = link_to edit_requester_path(requester),
+                        class: 'mr-1',
+                        title: 'Editar' do
+                        %i.fas.fa-edit
+                    - if can? :destroy, requester
+                      = link_to requester_path(requester),
+                        method: :delete,
+                        data: { confirm: 'Você tem certeza?' },
+                        title: 'Apagar' do
+                        %i.fas.fa-trash-alt
