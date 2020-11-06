@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :requesters
+  resources :loans, only: %i[new create]
 end

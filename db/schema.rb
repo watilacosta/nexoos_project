@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_120800) do
+ActiveRecord::Schema.define(version: 2020_11_06_184646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "loans", force: :cascade do |t|
+    t.decimal "amount", default: "0.0"
+    t.integer "term"
+    t.decimal "tax", default: "0.0"
+    t.bigint "requester_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["requester_id"], name: "index_loans_on_requester_id"
+  end
+
+  create_table "portions", force: :cascade do |t|
+    t.bigint "loan_id", null: false
+    t.date "due_date"
+    t.decimal "amount", default: "0.0"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["loan_id"], name: "index_portions_on_loan_id"
+  end
 
   create_table "requesters", force: :cascade do |t|
     t.string "company_name"
@@ -38,4 +57,6 @@ ActiveRecord::Schema.define(version: 2020_11_06_120800) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "loans", "requesters"
+  add_foreign_key "portions", "loans"
 end

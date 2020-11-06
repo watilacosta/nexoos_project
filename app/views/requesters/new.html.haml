@@ -1,1 +1,2 @@
-= render 'form', requester: @requester
+= render partial: 'form', locals: { requester: @requester,
+                                    title: 'Novo Solicitante' }
