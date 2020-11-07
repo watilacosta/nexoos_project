@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -13,15 +15,12 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
-  enum role: {
-    admin: 0
-  }
-
-  validates :name, :role, presence: true
+FactoryBot.define do
+  factory :user do
+    email                 { Faker::Internet.email(domain: 'nexoos') }
+    password              { '123456' }
+    password_confirmation { '123456' }
+    name                  { Faker::Name.name }
+    role                  { :admin }
+  end
 end
