@@ -13,8 +13,9 @@
 #  updated_at   :datetime         not null
 FactoryBot.define do
   factory :requester do
-    company_name {  }
-    address      {  }
-    phone        {  }
+    company_name { Faker::Company.name }
+    cnpj         { Faker::CNPJ.numeric }
+    address      { Faker::Address.street_address }
+    phone        { Faker::PhoneNumber.phone_number }
   end
 end
