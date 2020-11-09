@@ -18,4 +18,5 @@ class Loan < ApplicationRecord
   has_many :portions, dependent: :destroy
 
   validates :amount, :term, :tax, :requester, presence: true
+  validates_numericality_of :term, only_integer: true
 end
