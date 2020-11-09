@@ -12,11 +12,11 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
-# Empréstimo
-class Loan < ApplicationRecord
-  belongs_to :requester
-  has_many :portions, dependent: :destroy
-
-  validates :amount, :term, :tax, :requester, presence: true
-  validates_numericality_of :term, only_integer: true
+FactoryBot.define do
+  factory :loan do
+    amount { Faker::Number.decimal(l_digits: 3, r_digits: 3) }
+    term   { Faker::Number.within(range: 1..60) }
+    tax    { 0.015 }
+    requester
+  end
 end

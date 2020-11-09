@@ -3,8 +3,8 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   movies = Movie.new([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#   Character.new(name: 'Luke', movie: movies.first)
 
 puts 'CRIANDO USUÁRIO ADMIN'
 admin = User.create!(

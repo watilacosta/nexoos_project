@@ -28,19 +28,18 @@
                   %td= requester.address
                   %td= requester.phone
                   %td.d-flex.justify-content-center
-                    - if can? :edit, requester
+                    - if can? :manage, requester
                       = link_to edit_requester_path(requester),
                         class: 'mr-2',
                         title: 'Editar' do
                         %i.fas.fa-edit
-                    - if can? :destroy, requester
                       = link_to requester_path(requester),
                         class: 'mr-2',
                         method: :delete,
                         data: { confirm: 'Você tem certeza?' },
                         title: 'Apagar' do
                         %i.fas.fa-trash-alt
-                    - if can? :manage, requester
+
                       - if requester.loan.present?
                         = link_to loan_path(requester.loan),
                           class: 'mr-2',

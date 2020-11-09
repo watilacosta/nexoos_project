@@ -15,13 +15,13 @@
 class Portion < ApplicationRecord
   belongs_to :loan
 
-  def create; end
+  validates :loan, :due_date, :amount, presence: true
 
-  private
-
-  # 100000 * ((((1.015) ** 12) * 0.015) / (((1.015) ** 12) - 1)) = 9167.999290622945
-  def pmt
-    valor_presente * ((((1 + taxa) ** numero_de_periodos) * taxa) /
-        (((1 + taxa) ** numero_de_periodos) - 1))
+  def self.calculate_amount(loan)
+    loan_amount = loan.amount
+    tax    = loan.tax
+    term   = loan.term
+    amount = (loan_amount * ((((1 + tax)**term) * tax) / (((1 + tax)**term) - 1)))
+    amount.round(2)
   end
 end

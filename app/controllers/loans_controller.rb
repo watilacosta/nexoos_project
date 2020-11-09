@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class LoansController < ApplicationController # :nodoc:
+
+  def show
+    @loan = Loan.find(params[:id])
+  end
+
   def new
     @loan = Loan.new(requester_id: params[:requester_id])
   end

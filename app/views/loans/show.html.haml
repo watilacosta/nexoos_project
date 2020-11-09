@@ -1,0 +1,10 @@
+.row.d-flex.justify-content-center.mt-lg-5
+  .jumbotron
+    %h1.display-4= "Valor Solicitado: #{number_to_currency(@loan.amount)}"
+    %p.lead= show_parcelas(@loan)
+    %hr.my-4/
+    .d-flex.justify-content-between
+      %h3="Solicitante: #{@loan.requester.company_name}"
+      = link_to new_portion_path(loan_id: @loan), class: 'btn btn-primary btn-lg' do
+        %i.fas.fa-bars
+        Parcelamento
