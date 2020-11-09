@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_11_06_184646) do
 
   create_table "loans", force: :cascade do |t|
     t.decimal "amount", default: "0.0"
-    t.integer "term"
+    t.integer "term", default: 0
     t.decimal "tax", default: "0.0"
     t.bigint "requester_id", null: false
     t.datetime "created_at", precision: 6, null: false

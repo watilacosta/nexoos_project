@@ -13,6 +13,7 @@
           %table.table.table-hover.table-borderless.text-center
             %thead.bg-main
               %tr
+                %th #
                 %th Razão Socila
                 %th CNPJ
                 %th Endereço
@@ -21,6 +22,7 @@
             %tbody
               - @requesters.each do |requester|
                 %tr
+                  %td= requester.id
                   %td= requester.company_name
                   %td= requester.cnpj
                   %td= requester.address
@@ -28,12 +30,24 @@
                   %td.d-flex.justify-content-center
                     - if can? :edit, requester
                       = link_to edit_requester_path(requester),
-                        class: 'mr-1',
+                        class: 'mr-2',
                         title: 'Editar' do
                         %i.fas.fa-edit
                     - if can? :destroy, requester
                       = link_to requester_path(requester),
+                        class: 'mr-2',
                         method: :delete,
                         data: { confirm: 'Você tem certeza?' },
                         title: 'Apagar' do
                         %i.fas.fa-trash-alt
+                    - if can? :manage, requester
+                      - if requester.loan.present?
+                        = link_to loan_path(requester.loan),
+                          class: 'mr-2',
+                          title: 'Solicitação de Empréstimo' do
+                          %i.fas.fa-handshake
+                      - else
+                        = link_to new_loan_path(requester_id: requester.id),
+                          class: 'mr-2',
+                          title: 'Solicitar Empréstimo' do
+                          %i.fas.fa-dollar-sign

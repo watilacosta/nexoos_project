@@ -4,7 +4,7 @@ class RequestersController < ApplicationController # :nodoc:
   before_action :set_requester, only: %i[show edit update destroy]
 
   def index
-    @requesters = Requester.all
+    @requesters = Requester.includes(:loan)
   end
 
   def show; end

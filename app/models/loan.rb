@@ -16,4 +16,6 @@
 class Loan < ApplicationRecord
   belongs_to :requester
   has_many :portions, dependent: :destroy
+
+  validates :amount, :term, :tax, :requester, presence: true
 end

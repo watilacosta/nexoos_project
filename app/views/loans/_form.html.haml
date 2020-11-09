@@ -6,32 +6,38 @@
           .h6.text-center.mt-2= title
         .card-body.bg-light
           .form-group.row
-            %label.col-sm-2.col-form-label{for: 'company_name'} Razão Social:
+            %label.col-sm-2.col-form-label{for: 'requester'} Solicitante:
             .col-sm-10
-              = f.input :company_name,
+              = f.association :requester,
+                label_method: :company_name,
+                value_method: :id,
                 label: false,
                 class: 'form-control',
                 required: true
           .form-group.row
-            %label.col-sm-2.col-form-label{for: 'cnpj'} Endereço:
+            %label.col-sm-2.col-form-label{for: 'amount'} Valor (R$)
             .col-sm-10
-              = f.input :address,
-              label: false ,
-              class: 'form-control',
-              required: true
-          .form-group.row
-            %label.col-sm-2.col-form-label{for: 'cnpj'} CNPJ:
-            .col-sm-4
-              = f.input :cnpj,
-                label: false ,
+              = f.input :amount,
+                label: false,
+                input_html: { min: 0.0 },
                 class: 'form-control',
                 required: true
-            %label.col-sm-2.col-form-label{for: 'cnpj'} Telefone:
-            .col-sm-4
-              = f.input :phone,
-              label: false,
-              class: 'form-control',
-              required: true
+          .form-group.row
+            %label.col-sm-2.col-form-label{for: 'term'} Prazo
+            .col-sm-10
+              = f.input :term,
+                label: false,
+                input_html: { min: 1 },
+                class: 'form-control',
+                required: true
+          .form-group.row
+            %label.col-sm-2.col-form-label{for: 'tax'} Taxa (%)
+            .col-sm-10
+              = f.input :tax,
+                label: false,
+                input_html: { min: 0.0 },
+                class: 'form-control',
+                required: true
         .card-footer.bg-transparent.border-0
           .row.justify-content-between
             .col
