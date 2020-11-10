@@ -1,0 +1,17 @@
+.row.mt-5
+  .col-md.mb-4
+    .card.p-3
+      .card-header.bg-main Parcelas
+      .table-responsive
+        %table.table.table-hover.table-borderless.text-center
+          %thead
+            %tr
+              %th #
+              %th Vencimento
+              %th Valor (R$)
+          %tbody
+            - @loan.portions.each do |portion|
+              %tr
+                %td= portion.id
+                %td= portion.due_date.strftime('%d/%m/%Y')
+                %td= number_to_currency(portion.amount)

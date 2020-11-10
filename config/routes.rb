@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :requesters
-  resources :loans, only: %i[new create show]
+  resources :loans, except: %i[index]
   resources :portions, only: %i[new create]
 end
