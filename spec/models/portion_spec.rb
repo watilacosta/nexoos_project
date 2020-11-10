@@ -25,14 +25,22 @@ RSpec.describe Portion, type: :model do
   end
 
   describe '#create' do
-    amount = subject.calculate_amount(loan)
-    let(:portion) { build(:portion, loan_id: subject.loan.id, amount: amount) }
+    let(:loan) { create(:loan) }
+    let(:amount) { Portion.calculate_amount(loan) }
+    let(:portion) { build(:portion, loan_id: loan.id, amount: amount) }
 
     it 'when generate is successfully' do
       portion.generate
       expect(
         Portion.where(loan_id: portion.loan.id).count
       ).to eq(portion.loan.term)
+    end
+
+    it 'when generate is failed' do
+      portion.generate
+      expect(
+        Portion.where(loan_id: 0).count
+      ).to_not eq(portion.loan.term)
     end
   end
 end
