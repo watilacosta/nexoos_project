@@ -13,7 +13,7 @@
 #  updated_at   :datetime         not null
 #
 class Requester < ApplicationRecord # :nodoc:
-  has_one :loan
+  has_one :loan, dependent: :destroy
   validates :company_name, :cnpj, :address, :phone, presence: true
   validate :validate_cnpj
 

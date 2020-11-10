@@ -1,7 +1,7 @@
 .row.d-flex.justify-content-center.mt-lg-5
   .col.col-sm-12.col-md-10.col-xl-8
     = simple_form_for @portion do |f|
-      .card
+      .card.mt-5
         .card-header.text-white.bg-main.mb-2.rounded-top
           .h6.text-center.mt-2 Parcelamento
         .card-body.bg-light
@@ -17,7 +17,8 @@
             .col-sm-3
               = f.input :amount,
               label: false,
-              required: true
+              required: true,
+              readonly: true
           .form-group.row
             %label.col-sm-2.col-form-label{for: 'due_date'} Vencimento
             .col-sm-5

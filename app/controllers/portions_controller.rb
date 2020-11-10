@@ -7,9 +7,13 @@ class PortionsController < ApplicationController # :nodoc:
     @portion = Portion.new(loan_id: @loan.id, amount: amount)
   end
 
-  # def create
-  #   @portion = Portion.new(portion_params)
-  # end
+  def create
+    @portion = Portion.new(portion_params)
+    @portion.generate
+    redirect_to loan_path(@portion.loan), notice: 'Parcelas geradas com sucesso!'
+  rescue StandardError => e
+    redirect_back(fallback_location: portions_path, notice: e)
+  end
 
   private
 

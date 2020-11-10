@@ -23,4 +23,16 @@ RSpec.describe Portion, type: :model do
   describe 'Associations' do
     it { is_expected.to belong_to(:loan) }
   end
+
+  describe '#create' do
+    amount = subject.calculate_amount(loan)
+    let(:portion) { build(:portion, loan_id: subject.loan.id, amount: amount) }
+
+    it 'when generate is successfully' do
+      portion.generate
+      expect(
+        Portion.where(loan_id: portion.loan.id).count
+      ).to eq(portion.loan.term)
+    end
+  end
 end

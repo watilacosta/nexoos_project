@@ -1,1 +1,8 @@
-%h1 Painel Administrativo
+.jumbotron
+  %h1.display-4 Painel Administrativo
+  %p.lead Solicitação de Empréstimo
+  %hr.my-4
+  - if can? :new, Requester
+    = link_to new_requester_path, class: 'btn btn-primary btn-lg rounded-pill mt-3' do
+      %i.fas.fa-plus-circle.mr-2
+      Cadastrar Solicitante

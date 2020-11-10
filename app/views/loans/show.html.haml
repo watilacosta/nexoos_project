@@ -3,8 +3,27 @@
     %h1.display-4= "Valor Solicitado: #{number_to_currency(@loan.amount)}"
     %p.lead= show_parcelas(@loan)
     %hr.my-4/
-    .d-flex.justify-content-between
-      %h3="Solicitante: #{@loan.requester.company_name}"
-      = link_to new_portion_path(loan_id: @loan), class: 'btn btn-primary btn-lg' do
-        %i.fas.fa-bars
-        Parcelamento
+    - if @loan.portions.present?
+      .row.mt-5
+        .col-md.mb-4
+          .card.p-3
+            .card-header.bg-main Parcelas
+            .table-responsive
+              %table.table.table-hover.table-borderless.text-center
+                %thead
+                  %tr
+                    %th #
+                    %th Vencimento
+                    %th Valor (R$)
+                %tbody
+                  - @loan.portions.each do |portion|
+                    %tr
+                      %td= portion.id
+                      %td= portion.due_date.strftime('%d/%m/%Y')
+                      %td= number_to_currency(portion.amount)
+    - else
+      .d-flex.justify-content-between
+        %h3="Solicitante: #{@loan.requester.company_name}"
+        = link_to new_portion_path(loan_id: @loan), class: 'btn btn-primary btn-lg' do
+          %i.fas.fa-bars
+          Parcelamento

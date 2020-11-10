@@ -24,4 +24,14 @@ class Portion < ApplicationRecord
     amount = (loan_amount * ((((1 + tax)**term) * tax) / (((1 + tax)**term) - 1)))
     amount.round(2)
   end
+
+  def generate
+    loan.term.times do |term|
+      Portion.create!(
+        loan_id: loan_id,
+        due_date: due_date.advance(months: term),
+        amount: amount
+      )
+    end
+  end
 end
